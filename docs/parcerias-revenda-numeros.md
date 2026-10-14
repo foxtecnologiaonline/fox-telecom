@@ -59,7 +59,84 @@ Importante: no Brasil, **numeração só pode ser atribuída pela ANATEL a quem 
 
 Preços de atacado e condições de parceria comercial (setup fee, volume mínimo, % de margem) raramente são públicos — a maioria dos valores acima é de varejo/self-service ou estimativa de mercado. Os próximos passos recomendados são: (a) abrir conversas comerciais diretas com Zenvia, Algar Telecom e Telnyx/Plivo para cotação real; (b) validar com advogado de telecom o contrato de "Operadora Parceira" antes de assinar qualquer termo de cessão de numeração.
 
-## 6. Fontes
+## 6. Precificação, estrutura mínima e ponto de equilíbrio
+
+> **Aviso de premissas:** não existe tabela pública de preço de atacado por operadora/CPaaS (ver seção 5). Os valores abaixo combinam (a) preços de varejo/self-service já levantados (Telnyx, Plivo, DIDLogic) convertidos para R$, e (b) benchmarks de mercado de serviços de numeração virtual/PABX em nuvem no Brasil. Servem para dimensionar a ordem de grandeza e testar a estrutura do modelo — **precisam ser substituídos por cotações reais** antes de qualquer decisão de capital.
+
+### 6.1 CAPEX inicial (investimento pré-operacional, único)
+
+| Item | Estimativa (R$) |
+|---|---|
+| Abertura de empresa (CNPJ, contrato social se LTDA) | 500 – 2.000 |
+| Identidade visual básica (logo, manual de marca) | 0 – 3.000 |
+| Site institucional + landing page de vendas (no-code) | 0 – 3.000 |
+| Integração técnica inicial com a API do fornecedor (dev/freelancer) | 0 – 6.000 |
+| Setup de cobrança recorrente (Pix/boleto/cartão via gateway) | 0 – 500 |
+| Assessoria jurídica (revisão do contrato de "Operadora Parceira"/cessão de numeração) | 1.500 – 3.000 |
+| Capital de giro (2–3 meses de operação até gerar caixa) | 10.000 – 20.000 |
+| **Total CAPEX inicial** | **≈ R$ 15.000 – 35.000** |
+
+### 6.2 OPEX mensal — estrutura mínima para operar
+
+**Cenário enxuto** (fundador(a) full-time cuidando de vendas/operação, sem CLT):
+
+| Item | R$/mês |
+|---|---|
+| Contabilidade terceirizada | 300 – 600 |
+| Ferramentas (CRM, billing SaaS, WhatsApp Business API, helpdesk) | 300 – 600 |
+| Hospedagem, domínio, e-mail profissional | 100 – 200 |
+| Marketing/tráfego pago inicial | 1.000 – 2.500 |
+| Suporte ao cliente (freelancer/part-time, se não for o fundador) | 0 – 1.500 |
+| Taxa mínima de plataforma CPaaS (quando houver, pay-as-you-go geralmente é R$0) | 0 – 500 |
+| **Total OPEX fixo (enxuto)** | **≈ R$ 2.000 – 5.500/mês** |
+
+**Cenário estruturado** (+1 pessoa full-time em vendas/suporte, CLT ou PJ): soma **+ R$ 3.000 – 6.000/mês** → **≈ R$ 6.000 – 12.000/mês**.
+
+Pró-labore do(s) fundador(es) não está incluso acima — entra como variável de decisão (reinvestir vs. remunerar).
+
+### 6.3 Precificação (custo variável x preço de venda por número ativo)
+
+Custo variável estimado por número/cliente ativo (pago ao fornecedor):
+
+| Componente | R$/mês |
+|---|---|
+| Aluguel do número/DID | 10 – 25 |
+| Minutos inclusos (pacote médio ~100–300 min, custo ~R$0,05–0,12/min) | 10 – 25 |
+| **Custo variável total por número** | **≈ R$ 25 – 45** |
+
+Preço de venda sugerido (benchmark de mercado BR para número virtual/ramal em nuvem, R$49–149/mês):
+
+| Plano | Preço sugerido | Inclui |
+|---|---|---|
+| Básico | R$ 49/mês | 1 número + ~100 min |
+| Profissional | R$ 89/mês | 1 número + ~300 min + URA simples |
+| Avançado/0800 | R$ 149/mês | número especial + minutagem maior + recursos extras |
+
+Com um mix ponderado de planos, ARPU médio estimado ≈ **R$ 75/mês**, custo variável médio ≈ **R$ 33/mês** → **margem de contribuição ≈ R$ 42/mês por cliente (≈ 56%)**.
+
+### 6.4 Ponto de equilíbrio (break-even)
+
+Fórmula: **nº de clientes ativos para break-even = custos fixos mensais ÷ margem de contribuição por cliente**
+
+| Cenário de custo fixo | Margem de contribuição | Clientes ativos p/ break-even | Receita mensal no break-even |
+|---|---|---|---|
+| Enxuto (~R$ 3.750/mês) | Conservadora (R$ 24/mês) | ≈ 156 clientes | ≈ R$ 9.200/mês |
+| Enxuto (~R$ 3.750/mês) | Base (R$ 42/mês) | ≈ 89 clientes | ≈ R$ 6.700/mês |
+| Enxuto (~R$ 3.750/mês) | Otimista (R$ 67/mês) | ≈ 56 clientes | ≈ R$ 5.300/mês |
+| Estruturado (~R$ 9.000/mês) | Conservadora (R$ 24/mês) | ≈ 375 clientes | ≈ R$ 22.100/mês |
+| Estruturado (~R$ 9.000/mês) | Base (R$ 42/mês) | ≈ 214 clientes | ≈ R$ 16.000/mês |
+| Estruturado (~R$ 9.000/mês) | Otimista (R$ 67/mês) | ≈ 134 clientes | ≈ R$ 12.700/mês |
+
+**Leitura prática:**
+- No cenário mais enxuto possível (fundador solo, operação bem negociada), a FOX Telecom precisaria de **~90 a 160 clientes ativos** pagando um número/ramal para cobrir o custo fixo mensal.
+- Isso é um volume plausível para 6–12 meses de operação com aquisição de 10–20 clientes/mês — mas essa velocidade de vendas não foi modelada aqui (depende de canal de aquisição e CAC reais).
+- A alavanca mais forte para antecipar o break-even não é reduzir custo fixo, e sim **melhorar a margem de contribuição** (negociar atacado de verdade com o fornecedor, em vez de preço de varejo/self-service) — sair de R$24 para R$42 de margem por cliente já reduz o break-even em ~45%.
+
+### 6.5 Próximo passo recomendado
+
+Antes de comprometer capital: validar com 2–3 fornecedores (ex.: Zenvia, Telnyx/Plivo em volume, Algar Telecom) o preço real de atacado por número e por minuto nesse volume-alvo (ex.: 100–300 números), e refazer esta tabela com os números de cotação em vez das estimativas de varejo.
+
+## 7. Fontes
 
 - [Telnyx – Brazil DID requirements](https://support.telnyx.com/en/articles/5464041-brazil-did-requirements)
 - [Telnyx – Brazil virtual phone numbers](https://telnyx.com/phone-numbers/brazil)
