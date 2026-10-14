@@ -104,6 +104,32 @@ Custo variável estimado por número/cliente ativo (pago ao fornecedor):
 | Minutos inclusos (pacote médio ~100–300 min, custo ~R$0,05–0,12/min) | 10 – 25 |
 | **Custo variável total por número** | **≈ R$ 25 – 45** |
 
+#### 6.3.1 Confirmado na prática: Telnyx a US$ 1/mês por número
+
+Ao abrir o cadastro na Telnyx (fase 0), o valor real do aluguel do DID Brasil é **US$ 1,00/mês confirmado** — na faixa inferior da estimativa acima. Câmbio de referência usado aqui: **R$ 5,50/US$** (ajuste pela cotação do dia). Isso confirma e reduz a ponta inferior do custo variável, mas o custo por minuto de chamada (que não vem incluso no US$1 — é cobrado à parte, por uso) **ainda precisa ser confirmado no rate card de voz da própria Telnyx** (Mission Control Portal → Pricing, ou `telnyx.com/pricing/voice`) antes de fechar qualquer preço final. Como referência de mercado (mesma classe de produto, mesmo país, fornecedor comparável — Plivo), os valores praticados são: fixo em grandes centros ~US$0,021/min, fixo demais localidades ~US$0,033/min, móvel ~US$0,098/min.
+
+**Cenário 1 — Para uso próprio (Fase 0, validação, sem revenda):**
+
+| Item | Custo mensal |
+|---|---|
+| Aluguel do número (confirmado) | US$ 1,00 (≈ R$ 5,50) |
+| Minutos de teste (baixo volume, ~20–50 min/mês, tarifa blended ~US$0,04/min) | US$ 1 – 2 (≈ R$ 5,50 – 11) |
+| **Total estimado — uso próprio** | **≈ US$ 2 – 3/mês (≈ R$ 11 – 17/mês)** |
+
+Ou seja: validar a Fase 0 tecnicamente custa na prática **menos de R$ 20/mês** por número de teste — bem abaixo do CAPEX já reservado para isso.
+
+**Cenário 2 — Para revenda (repassando a um cliente final):**
+
+| Item | Custo mensal (pago à Telnyx) |
+|---|---|
+| Aluguel do número (confirmado) | US$ 1,00 (≈ R$ 5,50) |
+| Minutos inclusos no plano revendido (ex.: 100 min/mês, tarifa blended ~US$0,04/min) | US$ 4,00 (≈ R$ 22) |
+| **Custo variável total por número revendido** | **≈ US$ 5,00/mês (≈ R$ 27,50/mês)** |
+
+Isso confirma a ponta inferior da faixa já estimada (R$ 25–45) — com o dado real do aluguel, o custo variável tende para **~R$ 27–35/mês** em planos com até ~100–150 min inclusos, deixando a margem de contribuição da seção 6.3 (ARPU R$75 − custo R$33 ≈ R$42) como estimativa ainda válida, possivelmente conservadora.
+
+> **Ação pendente:** confirmar a tarifa de voz exata da Telnyx para o Brasil (fixo/móvel, local/DDD) no Mission Control Portal antes de fechar a tabela de preços definitiva — os valores de Plivo acima são só benchmark de mercado, não o rate card da Telnyx.
+
 Preço de venda sugerido (benchmark de mercado BR para número virtual/ramal em nuvem, R$49–149/mês):
 
 | Plano | Preço sugerido | Inclui |

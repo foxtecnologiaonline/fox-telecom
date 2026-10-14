@@ -8,11 +8,13 @@ Recomendação: abrir cadastro em **2 fornecedores em paralelo** (não custa nad
 
 | Prioridade | Fornecedor | Por que | Link oficial | Verificação exigida |
 |---|---|---|---|---|
-| 1 | **Telnyx** | Mais barato (DID BR a partir de US$1/mês), portal self-service maduro (Mission Control), boa documentação de API | Cadastro: [telnyx.com/sign-up](https://telnyx.com/sign-up) · Portal após cadastro: [portal.telnyx.com](https://portal.telnyx.com) | E-mail corporativo (ou login via Google/Microsoft), confirmação de e-mail, celular válido; alguns cadastros passam por KYC adicional pedindo CNPJ/documento societário |
-| 2 | **Zenvia** (ex-TotalVoice) | Empresa brasileira, suporte em português, já resolve a "Operadora Parceira" por trás — mais simples de validar o KYC usando CNPJ nacional | [zenvia.com](https://zenvia.com) → menu "Voz" / "Plataforma de Voz" (a própria Zenvia instrui criar conta nessa área antes de gerar o Access Token em "Minha Conta") | Aceite dos Termos de Serviço da Plataforma de Voz no cadastro |
+| 1 ✅ **confirmado** | **Telnyx** | Mais barato (DID BR **confirmado em US$1,00/mês**), portal self-service maduro (Mission Control), boa documentação de API — use este como fornecedor principal da Fase 0 | Cadastro: [telnyx.com/sign-up](https://telnyx.com/sign-up) · Portal após cadastro: [portal.telnyx.com](https://portal.telnyx.com) | E-mail corporativo (ou login via Google/Microsoft), confirmação de e-mail, celular válido; alguns cadastros passam por KYC adicional pedindo CNPJ/documento societário |
+| 2 ⚠️ **sem self-service claro** | **Zenvia** (ex-TotalVoice) | Empresa brasileira, suporte em português — mas o fluxo de cadastro/compra de número **não é um self-service óbvio**: historicamente é vendido via time comercial ("fale com consultor"), e a documentação técnica ainda vive no domínio legado `totalvoice.com.br/doc`. Não foi possível localizar uma página de cadastro direta nem confirmar se hoje existe compra de número 100% self-service | [zenvia.com](https://zenvia.com) → menu "Voz"; se não encontrar fluxo de autocadastro, usar a opção "Fale com um consultor" | Aceite dos Termos de Serviço da Plataforma de Voz no cadastro |
 | 3 (opcional, comparação) | **Plivo** | Preço competitivo (DID ~US$5/mês), bom para comparar custo com Telnyx | [plivo.com](https://plivo.com) → "Sign Up" | E-mail corporativo obrigatório (domínios pessoais como Gmail/Hotmail são recusados), verificação por celular, **não usar VPN** durante o cadastro |
 
-> Não guardei um link profundo de cadastro para Zenvia e Plivo porque não encontrei a URL exata documentada publicamente — use o link do domínio principal e navegue pelo menu ("Voz"/"Sign Up"), em vez de um link adivinhado.
+> **Decisão prática:** como a Telnyx já está confirmada e funcionando (self-service, preço validado), siga a Fase 0 com ela como fornecedor principal agora. Trate a Zenvia como item de comparação futura — abra contato comercial em paralelo, sem bloquear o andamento da Fase 0 esperando resposta deles.
+>
+> Não guardei um link profundo de cadastro para Plivo porque não encontrei a URL exata documentada publicamente — use o link do domínio principal e navegue pelo menu ("Sign Up"), em vez de um link adivinhado.
 
 ## 2. Documentos para ter em mãos (você já tem o CNPJ — falta reunir o resto)
 
