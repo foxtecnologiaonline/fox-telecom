@@ -77,6 +77,8 @@ Esta fase roda em paralelo à Fase 1, mas precisa estar 100% concluída antes de
 
 Quando o volume e o caixa sustentarem, buscar outorga SCM própria e/ou acordo formal de MVNO com uma SMP (Vivo/Claro/TIM/Algar) — como já mapeado no documento de parcerias (seção 3.3). Isso remove a limitação da Fase 3 e abre o leque de licitações que hoje exigem execução direta via STFC/SMP, além de melhorar a margem (sem a camada de revenda de terceiros).
 
+> Estruturação detalhada do pedido de outorga SCM (pré-requisitos, passo a passo no Sistema Mosaico, custos regulatórios e obrigações pós-outorga) em `docs/fase-4-outorga-scm.md` — inclui um alerta regulatório recente: a dispensa de outorga por porte reduzido foi suspensa pelo Acórdão ANATEL nº 176/2025, então não há mais atalho informal para operação pequena quando esta fase for disparada.
+
 ---
 
 ## Checklist de prontidão para licitar (resumo rápido)
