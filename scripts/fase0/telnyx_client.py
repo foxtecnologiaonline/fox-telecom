@@ -32,7 +32,7 @@ def _request(method, path, params=None, body=None):
         req.add_header("Content-Type", "application/json")
 
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=20) as resp:
             return resp.status, json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         raw = e.read().decode("utf-8")
@@ -40,6 +40,8 @@ def _request(method, path, params=None, body=None):
             return e.code, json.loads(raw)
         except json.JSONDecodeError:
             return e.code, {"raw_error": raw}
+    except urllib.error.URLError as e:
+        raise SystemExit(f"Falha de conexao com a API da Telnyx: {e.reason}")
 
 
 def get(path, params=None):

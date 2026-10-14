@@ -26,7 +26,7 @@ export $(grep -v '^#' .env | xargs)
 |---|---|---|
 | `check_balance.py` | Confirma que a API key funciona e mostra o saldo da conta | Não |
 | `search_numbers.py [DDD] [limite]` | Lista números brasileiros disponíveis para compra | Não |
-| `buy_number.py <numero-E164> --confirm` | Compra número(s) — exige a flag `--confirm` de propósito | **Sim** |
+| `buy_number.py <numero-E164> --confirm [--requirement-group-id <id>]` | Compra número(s) — exige a flag `--confirm` de propósito. Use `--requirement-group-id` se uma tentativa anterior retornar erro pedindo um grupo de requisitos regulatórios | **Sim** |
 | `list_my_numbers.py` | Lista números já comprados na conta | Não |
 
 ## Fluxo recomendado (depois do cadastro aprovado)
@@ -61,3 +61,16 @@ primeiro no Mission Control Portal e rode o script de novo.
 Os nomes exatos de alguns campos de resposta da API podem mudar — confirme
 contra a documentação oficial (`developers.telnyx.com/docs`) se algo não
 bater com o esperado. Nunca commite o arquivo `.env` com a chave real.
+
+Falhas de conexão (sem internet, DNS, timeout) aparecem como uma mensagem
+clara de erro — não como um traceback cru — e cada chamada tem timeout de
+20s para não travar indefinidamente.
+
+## Testes
+
+Todos os scripts foram validados contra um servidor HTTP local simulando as
+respostas da API da Telnyx (saldo, busca de números, criação de pedido,
+listagem) antes de serem commitados, cobrindo o caminho feliz, erro HTTP,
+falha de conexão e os dois modos de `buy_number.py` (com e sem
+`--requirement-group-id`). Isso não substitui testar contra a API real
+assim que houver uma chave válida.
