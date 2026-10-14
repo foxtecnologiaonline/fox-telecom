@@ -1,6 +1,6 @@
 # Roteiro de Lançamento — FOX Telecom
 
-> Fases de evolução: começar com a estrutura mínima para uso próprio (autoconsumo/validação), avançar para clientes externos, e só então mirar licitações públicas — que exigem um patamar de formalização e, possivelmente, enquadramento regulatório diferente do modelo de revenda puro. Complementa `docs/parcerias-revenda-numeros.md` (parceiros) e sua seção 6 (custo/break-even).
+> Fases de evolução: começar com a estrutura mínima para uso próprio (autoconsumo/validação), avançar para clientes externos, e só então mirar licitações públicas — que exigem um patamar de formalização e, possivelmente, enquadramento regulatório diferente do modelo de revenda puro. Complementa `docs/parcerias-revenda-numeros.md` (parceiros) e sua seção 6 (custo/break-even), e `docs/estrutura-sva.md` (enquadramento jurídico como SVA, que sustenta operar sem outorga própria).
 
 ## Visão geral das fases
 

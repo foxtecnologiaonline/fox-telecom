@@ -1,6 +1,6 @@
 # Parcerias para Revenda de Números de Operadoras Especializadas — FOX Telecom
 
-> Pesquisa de mercado para a fase 1 de lançamento da FOX Telecom: revenda de números (DID/numeração virtual) de operadoras especializadas, antes de buscar outorga própria.
+> Pesquisa de mercado para a fase 1 de lançamento da FOX Telecom: revenda de números (DID/numeração virtual) de operadoras especializadas, antes de buscar outorga própria. Ver `docs/estrutura-sva.md` para o enquadramento jurídico formal (SVA) que sustenta esse modelo de revenda sem outorga.
 
 ## 1. Por que essa é a porta de entrada certa
 
