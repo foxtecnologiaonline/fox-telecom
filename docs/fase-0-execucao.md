@@ -26,30 +26,60 @@ Recomendação: abrir cadastro em **2 fornecedores em paralelo** (não custa nad
 - [ ] Telefone celular válido para verificação por SMS/chamada
 - [ ] Cartão de crédito corporativo ou meio de pagamento internacional (Telnyx/Plivo cobram em USD via cartão; Zenvia tende a aceitar faturamento nacional)
 
-## 3. Passo a passo de execução
+## 3. Plano de execução otimizado (caminho crítico)
 
-1. **Criar e-mail corporativo** (se ainda não existir) para usar nos cadastros — evita recusa por domínio pessoal (caso do Plivo).
-2. **Cadastrar na Telnyx** (`telnyx.com/sign-up`): confirmar e-mail, completar KYC se solicitado, aguardar liberação (pode levar até 3 dias úteis para numeração BR).
-3. **Cadastrar na Zenvia** (`zenvia.com` → Voz): criar conta, aceitar os Termos da Plataforma de Voz, gerar o Access Token em "Minha Conta".
-4. **(Opcional) Cadastrar na Plivo** só para cotar/comparar preço, sem necessariamente operacionalizar nela ainda.
-5. **Comprar 1 a 3 números de teste** (DID local ou 0800) no fornecedor escolhido como principal.
-6. **Configurar encaminhamento/teste de chamada**: direcionar o número para um celular ou softphone e validar qualidade de áudio, ligação recebida e discagem.
-7. **Testar billing**: confirmar que a fatura/cobrança do fornecedor bate com o que foi estimado na seção 6.3 do `docs/parcerias-revenda-numeros.md` (custo variável por número).
-8. **Guardar evidências** (prints de configuração, comprovante de compra do número, teste de chamada gravado) — isso já começa a virar lastro para o atestado técnico da Fase 2.
+O item que mais demora é a aprovação de KYC da Telnyx (até 3 dias úteis) — por isso ele deve ser **disparado primeiro**, e tudo que não depende dele roda em paralelo enquanto se aguarda. Essa é a otimização principal do plano: nenhuma etapa fica esperando à toa.
+
+| Quando | Bloco | Tarefas | Depende de |
+|---|---|---|---|
+| **Dia 0 (hoje, ~1h)** | Disparar o item de maior lead time | 1) Criar e-mail corporativo, se não tiver. 2) Iniciar cadastro na Telnyx (`telnyx.com/sign-up`) e enviar documentos de KYC (CNPJ, contrato social, RG/CPF) assim que solicitado. | Documentos da seção 2 prontos |
+| **Dia 0 (em paralelo, ~30min)** | Preparar o ambiente técnico | 1) Clonar/baixar os scripts de `scripts/fase0/` (seção 5). 2) Conferir que o Python 3 está instalado. 3) Deixar o `.env` pronto para colar a API key assim que ela existir. | Nada — não depende da aprovação |
+| **Dia 0 (em paralelo, ~15min)** | Abrir contato com fornecedores de comparação | 1) Mandar mensagem comercial para a Zenvia ("Fale com um consultor"). 2) Criar cadastro na Plivo só para cotação. | Nada |
+| **Dia 1–3 (enquanto aguarda aprovação)** | Sem ação bloqueante | Acompanhar e-mail da Telnyx; se pedirem documento adicional, responder no mesmo dia para não perder posição na fila. | — |
+| **Dia da aprovação (~1h)** | Validação técnica via script | 1) Gerar API key no Mission Control Portal. 2) Rodar `check_balance.py`. 3) Adicionar crédito/cartão se saldo zerado. 4) Rodar `search_numbers.py` e escolher 1–3 números. 5) Rodar `buy_number.py --confirm`. | Cadastro aprovado + API key gerada |
+| **Mesmo dia (~30min)** | Validação de uso real | 1) No portal (UI), configurar encaminhamento simples do número comprado para seu celular. 2) Fazer uma ligação de teste real e avaliar áudio. 3) Rodar `check_balance.py` antes/depois da ligação para calcular o custo real por minuto. | Número comprado |
+| **+1 dia** | Fechamento da fase | 1) Comparar custo real vs. estimado (seção 6.3.1 do doc de parcerias). 2) Guardar evidências (prints, comprovantes). 3) Decidir fornecedor principal definitivo. | Teste concluído |
+
+## 4. Passo a passo detalhado
+
+1. **Criar e-mail corporativo** (se ainda não existir) — evita recusa por domínio pessoal (caso do Plivo).
+2. **Cadastrar na Telnyx** (`telnyx.com/sign-up`): confirmar e-mail, completar KYC assim que solicitado (não deixar parado esperando — é o item do caminho crítico).
+3. **Em paralelo, abrir contato com Zenvia** (comparação futura, não bloqueante) e, opcionalmente, criar conta na Plivo só para cotar.
+4. **Assim que aprovado**, gerar a API key no Mission Control Portal e usar os scripts da seção 5 para: checar saldo → buscar números → comprar 1–3 números de teste.
+5. **Configurar encaminhamento de voz** no portal (UI) apontando o número para um celular/softphone.
+6. **Fazer uma ligação de teste real** e validar qualidade de áudio, chamada recebida e discagem.
+7. **Testar billing**: usar `check_balance.py` antes/depois da ligação de teste para calcular o custo real por minuto, e comparar com a estimativa da seção 6.3.1 do `docs/parcerias-revenda-numeros.md`.
+8. **Guardar evidências** (prints de configuração, comprovante de compra do número, registro da ligação de teste) — vira lastro para o atestado técnico da Fase 2.
 9. **Decidir o fornecedor principal** com base no teste real (preço, qualidade, suporte) antes de avançar para a Fase 1 (vender para clientes externos).
 
-## 4. Checklist resumido
+## 5. Scripts de validação técnica
+
+Para não depender só de cliques manuais no portal (mais lento e mais sujeito a erro), os passos de checar saldo, buscar números e comprar número de teste estão automatizados em `scripts/fase0/` (Python puro, sem dependências externas). Ver `scripts/fase0/README.md` para instruções de uso. Resumo do fluxo:
+
+```
+python3 scripts/fase0/check_balance.py
+python3 scripts/fase0/search_numbers.py 11 10
+python3 scripts/fase0/buy_number.py +5511XXXXXXXXX --confirm
+python3 scripts/fase0/list_my_numbers.py
+```
+
+`buy_number.py` gasta dinheiro de verdade — por isso exige a flag explícita `--confirm`.
+
+## 6. Checklist resumido
 
 - [ ] E-mail corporativo criado
+- [ ] Cadastro Telnyx enviado (documentos de KYC submetidos)
 - [ ] Cadastro Telnyx aprovado
-- [ ] Cadastro Zenvia aprovado
+- [ ] Contato comercial aberto com Zenvia (comparação futura)
 - [ ] (Opcional) Cadastro Plivo feito para cotação
-- [ ] 1–3 números comprados e testados
+- [ ] API key gerada e validada (`check_balance.py`)
+- [ ] 1–3 números comprados (`buy_number.py`) e testados
+- [ ] Encaminhamento de voz configurado no portal
 - [ ] Chamada de teste validada (qualidade de áudio OK)
-- [ ] Custo real confirmado contra a estimativa da seção 6.3
+- [ ] Custo real confirmado contra a estimativa da seção 6.3.1
 - [ ] Fornecedor principal escolhido
 
-## 5. Fontes
+## 7. Fontes
 
 - [Telnyx – How to sign up for a Telnyx account](https://support.telnyx.com/en/articles/5295540-how-to-sign-up-for-a-telnyx-account)
 - [Telnyx Developers – Create account](https://developers.telnyx.com/docs/account-setup/create-account.md)
